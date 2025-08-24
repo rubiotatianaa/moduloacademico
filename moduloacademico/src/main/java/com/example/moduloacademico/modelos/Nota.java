@@ -1,6 +1,8 @@
 package com.example.moduloacademico.modelos;
 
 import com.example.moduloacademico.ayudas.TipoEvaluacion;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,6 +26,11 @@ public class Nota {
 
     @Column(name = "materia_id", nullable = false, unique = true)
     private  Integer materia_id;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_materia", referencedColumnName = "id")
+    @JsonBackReference(value = "relacionentrenotasymateria")
+    private Materia materia;
 
     public Nota() {
     }
